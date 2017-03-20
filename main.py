@@ -1,8 +1,5 @@
 import datetime
 
-
-
-
 def isFinal(alphabet, permutation, startIndex=0):
     usedElements = permutation[:startIndex]
     checkThis = permutation[startIndex:]
@@ -18,7 +15,6 @@ def getNextNonRepeatable(alphabet, after=None, used=None):
     if alphabet is None:
         log.warning("Alphabet is not specified. None will be returned")
         return None 
-    # or isn't list 
     
     if (after is None or alphabet.count(after) == 0): 
         x = -1
@@ -53,14 +49,17 @@ def getNextNonRepeatable(alphabet, after=None, used=None):
     return None
     
  
-def generatePermutation(alphabet, previous):
+def generatePermutation(alphabet, previous=None):
     ''' Generates permutation which follows the given one  '''
 
     
-    res_len = len(previous) 
+    if previous is None:
+        log.info("Previous permutation is not specified. None will be returned")
+    
+    permutation_length = len(previous) 
     previous = previous[:]
-    cur_perm = []
-    cycle_abc = alphabet[:]
+    permutation = []
+    alphabet_to_use = alphabet[:]
     x = 0
 
 
@@ -68,52 +67,52 @@ def generatePermutation(alphabet, previous):
                         .format(alphabet))
     log.debug('Previous permutation is {}'.format(previous))
     
-    if isFinal(alphabet, previous) and cur_perm == []:
+    if isFinal(alphabet, previous) and permutation == []:
         log.info("Permutation {} is last in the row of alphabet {}"
                         .format(previous, alphabet))
         return None
     
 
     
-    while len(cur_perm) <= res_len - 1:
+    while len(permutation) <= permutation_length - 1:
         
            
         #print('x: {}'.format(x) + '_'*40)   
-        #print('len(cur_perm): {}'.format(len(cur_perm)))   
+        #print('len(permutation): {}'.format(len(permutation)))   
            
         
         
-        if res_len - len(cur_perm) == 1:
+        if permutation_length - len(permutation) == 1:
             #print('One last element of permutation is left')
-            cur_perm.append(getNextNonRepeatable(alphabet, previous[x], cur_perm))
-            cycle_abc.remove(cur_perm[x])
+            permutation.append(getNextNonRepeatable(alphabet, previous[x], permutation))
+            alphabet_to_use.remove(permutation[x])
              
             
-        elif res_len - len(cur_perm) == 2: 
+        elif permutation_length - len(permutation) == 2: 
             #print('Two last elements of permutation are left {} and {}. Last alpha {}'.format(
             #        previous[x], previous[x+1], alphabet[:-2:-1][0]))
             
             if isFinal(alphabet, previous, x):
                 #print('Let\'s repeat them')
             
-                cur_perm.append(previous[x])
-                cur_perm.append(previous[x+1])
+                permutation.append(previous[x])
+                permutation.append(previous[x+1])
                 break
                 
             elif isFinal(alphabet, previous, x+1):
                 
-                cur_perm.append(getNextNonRepeatable(alphabet, previous[x], cur_perm)) 
-                #print("Increasing current... {}".format(cur_perm))
-                cur_perm.append(getNextNonRepeatable(alphabet, used=cur_perm)) 
-                #print("Finding first not used... {}".format(cur_perm))
+                permutation.append(getNextNonRepeatable(alphabet, previous[x], permutation)) 
+                #print("Increasing current... {}".format(permutation))
+                permutation.append(getNextNonRepeatable(alphabet, used=permutation)) 
+                #print("Finding first not used... {}".format(permutation))
                 
                 break
             else:
             
-                cur_perm.append(previous[x]) 
-                #print("Repeating current... {}".format(cur_perm))
-                cur_perm.append(getNextNonRepeatable(alphabet,previous[x+1],used=cur_perm)) 
-                #print("Finding next for {} current... {}".format(previous[x+1], cur_perm))
+                permutation.append(previous[x]) 
+                #print("Repeating current... {}".format(permutation))
+                permutation.append(getNextNonRepeatable(alphabet,previous[x+1],used=permutation)) 
+                #print("Finding next for {} current... {}".format(previous[x+1], permutation))
                 
                 break
 
@@ -122,28 +121,28 @@ def generatePermutation(alphabet, previous):
             #print('lefover is last in permutation, increase current sign')
             #print("position in current permutation = {}".format(x))
 
-            cur_perm.append(getNextNonRepeatable(alphabet, previous[x], cur_perm))
-            cycle_abc.remove(cur_perm[x])
+            permutation.append(getNextNonRepeatable(alphabet, previous[x], permutation))
+            alphabet_to_use.remove(permutation[x])
             
-            #print("adding leftover {}".format(cycle_abc[:res_len - len(cur_perm)]))
-            for e in cycle_abc[:res_len - len(cur_perm)]:
-                cur_perm.append(e)
+            #print("adding leftover {}".format(alphabet_to_use[:permutation_length - len(permutation)]))
+            for e in alphabet_to_use[:permutation_length - len(permutation)]:
+                permutation.append(e)
                 
             break    
         else:
             
             #print('Use the same element as in previous permutation')
-            cur_perm.append(previous[x])
-            cycle_abc.remove(cur_perm[x])
+            permutation.append(previous[x])
+            alphabet_to_use.remove(permutation[x])
             
         x += 1
         #print('prev:     {}'.format(previous))
-        #print('cur_perm: {}'.format(cur_perm))
+        #print('permutation: {}'.format(permutation))
         #print('x:        {}'.format(x))
-        #print('abc left: {}'.format(cycle_abc))
+        #print('abc left: {}'.format(alphabet_to_use))
 
-    #print("cur_perm is {}".format(cur_perm))
-    return cur_perm
+    #print("permutation is {}".format(permutation))
+    return permutation
     
     
 def generatePermutations(alphabet, startWith=None, count=0):
@@ -182,8 +181,8 @@ log.addHandler(handler)
     
 if __name__ == "__main__":
     started_at = datetime.datetime.now()
-    log.critical("Started at ..." + str())
-    abc = [0,1,2,3,4,5,6,7,8,9]
+    log.critical("Started at ..." + str(started_at))
+    abc = [0,1,2,3,4,5,6,7,8]
     ##prev = [2,3, 1]
     ##prev = [2,3, 5]
     ##prev = [2,6] 
@@ -191,7 +190,7 @@ if __name__ == "__main__":
     prev = [1,2,3, 4]
     #prev = [1]
     #print(isFinal1([1,2,3], [2,3,1], 2))
-    log.critical("res \n{}".format(generatePermutations(abc)))
+    log.error("res \n{}".format(generatePermutations(abc)))
     #v = generateNextPermutations(prev, abc)
     #v = generateNextPermutation(prev, abc)
     #v = getNextNonRepeatable(abc, 5, [2,4])
@@ -200,12 +199,3 @@ if __name__ == "__main__":
     #print('v is {}'.format(v))
     
     log.critical("Ended for ..." + str(datetime.datetime.now() - started_at))
-
-'''
-
-
-12435
-
-1?  -  len - 3
-
-'''
