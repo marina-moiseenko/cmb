@@ -1,4 +1,5 @@
 cx_Oracle-doc/**
 Lib/**
 Scripts/**
+.idea/**
 **/__pycache__
