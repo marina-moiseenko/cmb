@@ -187,10 +187,10 @@ if __name__ == "__main__":
     ##prev = [2,3, 5]
     ##prev = [2,6] 
     ##prev = [6,5]
-    prev = [1,2,3, 4]
+    prev = ['1','2','3', '4']
     #prev = [1]
     #print(isFinal1([1,2,3], [2,3,1], 2))
-    log.error("res \n{}".format(generatePermutations(abc)))
+    #log.error("res \n{}".format(generatePermutations(abc)))
     #v = generateNextPermutations(prev, abc)
     #v = generateNextPermutation(prev, abc)
     #v = getNextNonRepeatable(abc, 5, [2,4])
@@ -198,4 +198,27 @@ if __name__ == "__main__":
     #print('prev is {}'.format(prev))
     #print('v is {}'.format(v))
     
-    log.critical("Ended for ..." + str(datetime.datetime.now() - started_at))
+    from com.mvm.generators.permutation import Permutation
+    
+    p1 = Permutation('123456')
+    p2 = Permutation('abcdef')
+    p1.setPermutationLength(4)
+    print(p1.getPermutationLength())
+    
+    p1.generatePermutation(prev)
+    print(p1.justValidated())
+    p1.validate()
+    print(p1.justValidated())
+    
+    p1.printCalls()
+    
+    #p1.setPermutationLength(5)
+    #print(p1.getPermutationLength())
+    #p2.setPermutationLength(5)
+    #print(p2.getPermutationLength())
+    
+    #p2.printCalls()
+    
+
+    
+    #log.critical("Ended for ..." + str(datetime.datetime.now() - started_at))
