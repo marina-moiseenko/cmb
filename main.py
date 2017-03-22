@@ -1,22 +1,22 @@
 import datetime
 
-def isFinal(alphabet, permutation, startIndex=0):
-    usedElements = permutation[:startIndex]
-    checkThis = permutation[startIndex:]
+
+def is_final(alphabet, permutation, start_index=0):
+    used_elements = permutation[:start_index]
+    check_this = permutation[start_index:]
     alphabet = alphabet[:]
-    for e in usedElements:
+    for e in used_elements:
         if alphabet.count(e) > 0:
             alphabet.remove(e)
-    return alphabet[:-len(checkThis)-1:-1] == checkThis
+    return alphabet[:-len(check_this)-1:-1] == check_this
 
-    
 
 def getNextNonRepeatable(alphabet, after=None, used=None):
     if alphabet is None:
         log.warning("Alphabet is not specified. None will be returned")
         return None 
     
-    if (after is None or alphabet.count(after) == 0): 
+    if after is None or alphabet.count(after) == 0:
         x = -1
         if after is None:
             log.info("Available element will be searched from the begining of alphabet. Strat point is not specified"
@@ -52,7 +52,6 @@ def getNextNonRepeatable(alphabet, after=None, used=None):
 def generatePermutation(alphabet, previous=None):
     ''' Generates permutation which follows the given one  '''
 
-    
     if previous is None:
         log.info("Previous permutation is not specified. None will be returned")
     
@@ -62,12 +61,11 @@ def generatePermutation(alphabet, previous=None):
     alphabet_to_use = alphabet[:]
     x = 0
 
-
     log.debug('Generating permutation for alphabet {}'
                         .format(alphabet))
     log.debug('Previous permutation is {}'.format(previous))
     
-    if isFinal(alphabet, previous) and permutation == []:
+    if is_final(alphabet, previous) and permutation == []:
         log.info("Permutation {} is last in the row of alphabet {}"
                         .format(previous, alphabet))
         return None
@@ -92,14 +90,14 @@ def generatePermutation(alphabet, previous=None):
             #print('Two last elements of permutation are left {} and {}. Last alpha {}'.format(
             #        previous[x], previous[x+1], alphabet[:-2:-1][0]))
             
-            if isFinal(alphabet, previous, x):
+            if is_final(alphabet, previous, x):
                 #print('Let\'s repeat them')
             
                 permutation.append(previous[x])
                 permutation.append(previous[x+1])
                 break
                 
-            elif isFinal(alphabet, previous, x+1):
+            elif is_final(alphabet, previous, x+1):
                 
                 permutation.append(getNextNonRepeatable(alphabet, previous[x], permutation)) 
                 #print("Increasing current... {}".format(permutation))
@@ -116,7 +114,7 @@ def generatePermutation(alphabet, previous=None):
                 
                 break
 
-        elif isFinal(alphabet, previous,x+1): 
+        elif is_final(alphabet, previous, x+1):
             
             #print('lefover is last in permutation, increase current sign')
             #print("position in current permutation = {}".format(x))
@@ -202,13 +200,13 @@ if __name__ == "__main__":
     
     p1 = Permutation('123456')
     p2 = Permutation('abcdef')
-    p1.setPermutationLength(4)
-    print(p1.getPermutationLength())
+    p1.set_permutation_length(4)
+    print(p1.get_permutation_length())
     
     p1.generatePermutation(prev)
-    print(p1.justValidated())
+    print(p1.just_validated())
     p1.validate()
-    print(p1.justValidated())
+    print(p1.just_validated())
     
     p1.printCalls()
     
