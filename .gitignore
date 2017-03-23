@@ -5,7 +5,10 @@ cx_Oracle-doc/
 out/
 Lib/
 Scripts/
+Include/
 **.pyc
 
 /*
+!/com
+!/main.py
 !/.gitignore
