@@ -1,0 +1,37 @@
+<application>
+  <component name="ProjectJdkTable">
+    <jdk version="2">
+      <name value="Python 3.6.0 (C:\Users\y700lightd\AppData\Local\Programs\Python\Python36\python.exe)" />
+      <type value="Python SDK" />
+      <version value="Python 3.6.0" />
+      <homePath value="C:\Users\y700lightd\AppData\Local\Programs\Python\Python36\python.exe" />
+      <roots>
+        <annotationsPath>
+          <root type="composite" />
+        </annotationsPath>
+        <classPath>
+          <root type="composite">
+            <root type="simple" url="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/DLLs" />
+            <root type="simple" url="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib" />
+            <root type="simple" url="file://$USER_HOME$/AppData/Local/Programs/Python/Python36" />
+            <root type="simple" url="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages" />
+            <root type="simple" url="file://$USER_HOME$/.IdeaIC2017.1/system/python_stubs/622405681" />
+            <root type="simple" url="file://$APPLICATION_PLUGINS_DIR$/python-ce/helpers/python-skeletons" />
+            <root type="simple" url="file://$APPLICATION_PLUGINS_DIR$/python-ce/helpers/typeshed/stdlib/3.6" />
+            <root type="simple" url="file://$APPLICATION_PLUGINS_DIR$/python-ce/helpers/typeshed/stdlib/3" />
+            <root type="simple" url="file://$APPLICATION_PLUGINS_DIR$/python-ce/helpers/typeshed/stdlib/2and3" />
+            <root type="simple" url="file://$APPLICATION_PLUGINS_DIR$/python-ce/helpers/typeshed/third_party/3" />
+            <root type="simple" url="file://$APPLICATION_PLUGINS_DIR$/python-ce/helpers/typeshed/third_party/2and3" />
+          </root>
+        </classPath>
+        <javadocPath>
+          <root type="composite" />
+        </javadocPath>
+        <sourcePath>
+          <root type="composite" />
+        </sourcePath>
+      </roots>
+      <additional />
+    </jdk>
+  </component>
+</application>
