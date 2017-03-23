@@ -166,7 +166,6 @@ class Permutation(object):
 
     def generate_permutation(self):
         ''' Generates permutation which follows the given one  
-        
         '''
 
         self.lastCall.append(inspect.stack()[0][3])
