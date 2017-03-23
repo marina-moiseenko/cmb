@@ -165,8 +165,7 @@ class Permutation(object):
         return last == 'validate'
 
     def generate_permutation(self):
-        ''' Generates permutation which follows the given one  
-        
+        ''' Generates permutation which follows the given one ww 
         '''
 
         self.lastCall.append(inspect.stack()[0][3])
