@@ -6,3 +6,6 @@ out/
 Lib/
 Scripts/
 **.pyc
+
+/*
+!/.gitignore
