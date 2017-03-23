@@ -1,5 +1,8 @@
-cx_Oracle-doc/**
-Lib/**
-Scripts/**
-.idea/**
-**/__pycache__
+.idea
+_windows/
+codestyles/
+cx_Oracle-doc/
+out/
+Lib/
+Scripts/
+**.pyc
