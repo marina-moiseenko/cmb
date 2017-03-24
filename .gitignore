@@ -7,8 +7,12 @@ Lib/
 Scripts/
 Include/
 /**.pyc
+**log.*
+
 
 /*
 !/src
 !/main.py
 !/.gitignore
+**/**/__pycache__/
+

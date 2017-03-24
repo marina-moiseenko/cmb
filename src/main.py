@@ -15,10 +15,10 @@ if __name__ == "__main__":
 
     from com.mvm.generators.permutation import Permutation
 
-    p1 = Permutation('123')
+    p1 = Permutation('ab')
     # p1.start_after = '4231'
     p1.permutation_length = 2
 
     for e in p1.generate_permutations():
-        print(e)
+        print(''.join(e))
 

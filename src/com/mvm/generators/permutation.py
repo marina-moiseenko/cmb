@@ -15,7 +15,7 @@ class Permutation(object):
         
         if not Permutation.__log:
             Permutation.__log = logging.getLogger('x')
-            Permutation.__log.setLevel(logging.DEBUG)
+            Permutation.__log.setLevel(logging.INFO)
             handler = logging.FileHandler("log.txt")
             bf = logging.Formatter(
                 '{asctime} {name} {levelname:8s} {message}', style='{')
@@ -189,48 +189,26 @@ class Permutation(object):
             return None
 
         while len(permutation) <= self.__permutation_length - 1:
-            Permutation.__log.debug('Symbol: {}'.format(x+1) + '_'*40)
 
-            if self.__permutation_length - len(permutation) == 1:
-                # print('One last element of permutation is left ')
-                permutation.append(self.get_next_non_repeatable(previous[x], permutation))
-                alphabet_to_use.remove(permutation[x])
-
-            elif self.__permutation_length - len(permutation) == 2:
-                Permutation.__log.debug(
-                    'Two last elements of permutation are left {} and {}. Last alpha {}'
-                    .format(previous[x], previous[x+1], self.alphabet[:-2:-1][0]))
+            if self.permutation_length - len(permutation) != 1:
 
                 if self.is_final(previous, x+1):
-                    
                     permutation.append(self.get_next_non_repeatable(previous[x], permutation))
-                    permutation.append(self.get_next_non_repeatable(used=permutation))
+                    alphabet_to_use.remove(permutation[x])
 
-                    break
+                    for e in alphabet_to_use[:self.permutation_length - len(permutation)]:
+                        permutation.append(e)
+
                 else:
-                
-                    permutation.append(previous[x]) 
-                    Permutation.__log.debug("Repeating current... {}".format(permutation))
-                    Permutation.__log.debug("Finding next for {} current... {}".format(previous[x+1], permutation))
-                    permutation.append(self.get_next_non_repeatable(previous[x + 1], permutation))
-                    
-                    break
+                    permutation.append(previous[x])
+                    alphabet_to_use.remove(permutation[x])
 
-            elif self.is_final(previous, x+1):
-                
+            else:
                 permutation.append(self.get_next_non_repeatable(previous[x], permutation))
                 alphabet_to_use.remove(permutation[x])
-                
-                for e in alphabet_to_use[:self.__permutation_length - len(permutation)]:
-                    permutation.append(e)
-                    
-                break    
-            else:
-                
-                permutation.append(previous[x])
-                alphabet_to_use.remove(permutation[x])
-                
+
             x += 1
+
         self.start_after = permutation
         Permutation.__log.info("next permutation is {}".format(permutation))
         return permutation
@@ -260,6 +238,6 @@ class Permutation(object):
             x += 1
 
         for e in res:
-            Permutation.__log.debug(" : {}".format(e))
+            Permutation.__log.info(" : {}".format(''.join(e)))
         return res
 
