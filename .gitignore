@@ -1,0 +1,14 @@
+.idea/
+_windows/
+codestyles/
+cx_Oracle-doc/
+out/
+Lib/
+Scripts/
+Include/
+/**.pyc
+
+/*
+!/src
+!/main.py
+!/.gitignore
