@@ -6,7 +6,8 @@ class Permutation(object):
 
     __log = None
     
-    errorsDict = {1000: 'Alphabet is not specified'}
+    errorsDict = {1001: 'Alphabet is not specified.',
+                  1002: 'Neither length nor start point are specified.'}
     
     warningsDict = {}
 
@@ -35,8 +36,6 @@ class Permutation(object):
         
     def __init__(self, alphabet):
 
-        # l1 = permutation.__getLogger1()
-        
         Permutation.__log.debug("__init__ invoked")
 
         if isinstance(alphabet, list):
@@ -219,7 +218,7 @@ class Permutation(object):
 
         res = []
 
-        Permutation.__log.debug("Generate series of permutations issued")
+        Permutation.__log.debug("Generation series of permutations issued")
         Permutation.__log.debug(
             "Alphabet: {}, required permutations: {}".format(self.alphabet, count))
 
